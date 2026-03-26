@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Apex Mind</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/5.0.8/inputmask.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const phoneInput = document.getElementById('phone');
+
+        if (phoneInput) {
+            Inputmask("+7 (999) 999-99-99").mask(phoneInput);
+        }
+    });
+</script>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="#">APEX MIND</a>
+
+        <div class="navbar-nav ms-auto">
+
+            <a class="nav-link px-3" href="#about">О проекте</a>
+            <a class="nav-link px-3" href="#how">Как работает</a>
+            <a class="nav-link px-3" href="#use">Применение</a>
+            <a class="nav-link px-3" href="#survey">Опрос</a>
+            <a class="nav-link px-3" href="#contacts">Контакты</a>
+
+            <div sec:authorize="!isAuthenticated()">
+                <a class="btn btn-outline-light ms-3" href="/login">Вход</a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <a class="btn btn-outline-light ms-3" href="/admin">Заявки</a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <form th:action="@{/logout}" method="post" class="d-inline">
+                    <button class="btn btn-outline-light ms-2">Выход</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div style="margin-top: 80px;"></div>
+
+<section class="hero-section d-flex align-items-center text-center">
+    <div class="container">
+        <h1 class="hero-title">
+            Adaptive Plan Bot <span class="hero-plus">+</span> APEX MIND
+        </h1>
+
+        <p class="hero-subtitle">
+            Интеллектуальная экосистема управления строительством
+        </p>
+
+        <p class="hero-description">
+            Стройка, которая думает сама. Руководители, которые видят на шаг вперёд.
+        </p>
+
+        <a href="#lead" class="hero-btn">
+            Станьте пилотным партнером
+        </a>
+    </div>
+</section>
+
+<section class="problem-section py-5">
+    <div class="container">
+
+        <h2 class="mb-5 text-center">
+            Почему 15–30% бюджета уходят впустую?
+        </h2>
+
+        <div class="row text-start">
+
+            <!-- Блок 1 -->
+            <div class="col-md-4">
+                <div class="problem-item">
+                    <div class="problem-number">47%</div>
+                    <div class="problem-text">
+                        решений принимаются без полной информации
+                        <span class="problem-highlight">68% времени – рутина</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок 2 -->
+            <div class="col-md-4">
+                <div class="problem-item">
+                    <div class="problem-number">8%</div>
+                    <div class="problem-text">
+                        сотрудников понимают стратегию компании
+                        <span class="problem-highlight">60% инициатив не достигают целей</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Блок 3 -->
+            <div class="col-md-4">
+                <div class="problem-item">
+                    <div class="problem-number">200+</div>
+                    <div class="problem-text">
+                        часов опыта теряется при уходе ключевого сотрудника
+                        <span class="problem-highlight">ошибки повторяются</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="about" class="solution-section py-5">
+    <div class="container">
+
+        <h2 class="mb-5 text-center">
+            Наше решение – два продукта, одна экосистема
+        </h2>
+
+        <div class="row g-4">
+
+            <!-- Карточка 1 -->
+            <div class="col-md-6">
+                <div class="solution-card">
+                    <div class="solution-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-bot-icon lucide-bot">
+                            <path d="M12 8V4H8"/>
+                            <rect width="16" height="12" x="4" y="8" rx="2"/>
+                            <path d="M2 14h2"/>
+                            <path d="M20 14h2"/>
+                            <path d="M15 13v2"/>
+                            <path d="M9 13v2"/>
+                        </svg>
+                    </div>
+
+                    <div class="solution-title">
+                        Adaptive Plan Bot
+                    </div>
+
+                    <div class="solution-text">
+                        <b>AI-система адаптивного планирования.</b><br>
+                        Автоматически строит и перестраивает планы в реальном времени с учётом ресурсов, погоды,
+                        поставок.
+                        Работает напрямую с BIM, предсказывает проблемы за 3-7 дней.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Карточка 2 -->
+            <div class="col-md-6">
+                <div class="solution-card">
+
+                    <div class="solution-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-brain-icon lucide-brain">
+                            <path d="M12 18V5"/>
+                            <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/>
+                            <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/>
+                            <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/>
+                            <path d="M18 18a4 4 0 0 0 2-7.464"/>
+                            <path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/>
+                            <path d="M6 18a4 4 0 0 1-2-7.464"/>
+                            <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/>
+                        </svg>
+                    </div>
+
+                    <div class="solution-title">
+                        APEX MIND
+                    </div>
+
+                    <div class="solution-text">
+                        <b>Система управления сложностью.</b><br>
+                        Цифровые двойники руководителей, прогноз рисков, обоснованные рекомендации.
+                        Превращает опыт команды в постоянно растущий цифровой актив.
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="how" class="how-section py-5">
+    <div class="container">
+
+        <h2 class="mb-5">Как это работает</h2>
+
+        <div class="row g-4">
+
+            <!-- 1 -->
+            <div class="col-md-4">
+                <div class="how-card">
+                    <div class="how-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-database-icon lucide-database">
+                            <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                            <path d="M3 5V19A9 3 0 0 0 21 19V5"/>
+                            <path d="M3 12A9 3 0 0 0 21 12"/>
+                        </svg>
+                    </div>
+                    <div class="how-title">Единая картина</div>
+                    <div class="how-text">
+                        BIM, IoT, ERP, погодные API — все данные стекаются в один контур.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="col-md-4">
+                <div class="how-card">
+                    <div class="how-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-git-fork-icon lucide-git-fork">
+                            <circle cx="12" cy="18" r="3"/>
+                            <circle cx="6" cy="6" r="3"/>
+                            <circle cx="18" cy="6" r="3"/>
+                            <path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9"/>
+                            <path d="M12 12v3"/>
+                        </svg>
+                    </div>
+                    <div class="how-title">Интеллектуальное ядро</div>
+                    <div class="how-text">
+                        Граф опыта, семантическая модель — система понимает взаимосвязи и учится на истории.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="col-md-4">
+                <div class="how-card">
+                    <div class="how-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-user-icon lucide-user">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <div class="how-title">Цифровые двойники</div>
+                    <div class="how-text">
+                        Каждый руководитель получает персонального ассистента.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="col-md-4">
+                <div class="how-card">
+                    <div class="how-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-cpu-icon lucide-cpu">
+                            <path d="M12 20v2"/>
+                            <path d="M12 2v2"/>
+                            <path d="M17 20v2"/>
+                            <path d="M17 2v2"/>
+                            <path d="M2 12h2"/>
+                            <path d="M2 17h2"/>
+                            <path d="M2 7h2"/>
+                            <path d="M20 12h2"/>
+                            <path d="M20 17h2"/>
+                            <path d="M20 7h2"/>
+                            <path d="M7 20v2"/>
+                            <path d="M7 2v2"/>
+                            <rect x="4" y="4" width="16" height="16" rx="2"/>
+                            <rect x="8" y="8" width="8" height="8" rx="1"/>
+                        </svg>
+                    </div>
+                    <div class="how-title">ИИ-агенты</div>
+                    <div class="how-text">
+                        Рутинные задачи автоматизируются: ресурсы, контроль качества, отчёты.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="col-md-4">
+                <div class="how-card">
+                    <div class="how-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-check-icon lucide-check">
+                            <path d="M20 6 9 17l-5-5"/>
+                        </svg>
+                    </div>
+                    <div class="how-title">Человек утверждает</div>
+                    <div class="how-text">
+                        Руководитель принимает ключевые решения.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="col-md-4">
+                <div class="how-card">
+                    <div class="how-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-chart-line-icon lucide-chart-line">
+                            <path d="M3 3v16a2 2 0 0 0 2 2h16"/>
+                            <path d="m19 9-5 5-4-4-3 3"/>
+                        </svg>
+                    </div>
+                    <div class="how-title">Непрерывное обучение</div>
+                    <div class="how-text">
+                        Опыт накапливается и используется повторно.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="metrics-section py-5">
+    <div class="container">
+
+        <h2 class="metrics-title">
+            Цифры, которые говорят сами за себя
+        </h2>
+
+        <div class="row justify-content-center text-center">
+
+            <div class="col-md-3 col-6 metric-item">
+                <div class="metric-value">25%</div>
+                <div class="metric-text">сокращение сроков</div>
+            </div>
+
+            <div class="col-md-3 col-6 metric-item">
+                <div class="metric-value">40%</div>
+                <div class="metric-text">меньше простоев</div>
+            </div>
+
+            <div class="col-md-3 col-6 metric-item">
+                <div class="metric-value">92%</div>
+                <div class="metric-text">точность прогнозов</div>
+            </div>
+
+            <div class="col-md-3 col-6 metric-item">
+                <div class="metric-value">2.3x</div>
+                <div class="metric-text">рост эффективности решений</div>
+            </div>
+
+            <div class="col-md-3 col-6 metric-item">
+                <div class="metric-value">300%</div>
+                <div class="metric-text">ROI за 12 месяцев</div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <span style="font-size: 12px; color: #9aa0a6;">
+              *ожидание
+            </span>
+        </div>
+
+    </div>
+</section>
+
+<section id="use" class="target-section py-5">
+    <div class="container">
+
+        <h2 class="mb-5">Для кого это</h2>
+
+        <div class="row g-4">
+
+            <!-- 1 -->
+            <div class="col-md-4">
+                <div class="target-card">
+                    <div class="target-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-hard-hat-icon lucide-hard-hat">
+                            <path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/>
+                            <path d="M14 6a6 6 0 0 1 6 6v3"/>
+                            <path d="M4 15v-3a6 6 0 0 1 6-6"/>
+                            <rect x="2" y="15" width="20" height="4" rx="1"/>
+                        </svg>
+                    </div>
+                    <div class="target-title">Генподрядчики</div>
+                    <div class="target-text">
+                        Снижение простоев, экономия на логистике, меньше штрафов, больше прибыли.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="col-md-4">
+                <div class="target-card">
+                    <div class="target-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-building-icon lucide-building">
+                            <path d="M12 10h.01"/>
+                            <path d="M12 14h.01"/>
+                            <path d="M12 6h.01"/>
+                            <path d="M16 10h.01"/>
+                            <path d="M16 14h.01"/>
+                            <path d="M16 6h.01"/>
+                            <path d="M8 10h.01"/>
+                            <path d="M8 14h.01"/>
+                            <path d="M8 6h.01"/>
+                            <path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/>
+                            <rect x="4" y="2" width="16" height="20" rx="2"/>
+                        </svg>
+                    </div>
+                    <div class="target-title">Заказчики / девелоперы</div>
+                    <div class="target-text">
+                        Реальная прозрачность, точные прогнозы сроков, снижение инвестиционных рисков.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="col-md-4">
+                <div class="target-card">
+                    <div class="target-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-clipboard-list-icon lucide-clipboard-list">
+                            <rect width="8" height="4" x="8" y="2" rx="1" ry="1"/>
+                            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                            <path d="M12 11h4"/>
+                            <path d="M12 16h4"/>
+                            <path d="M8 11h.01"/>
+                            <path d="M8 16h.01"/>
+                        </svg>
+                    </div>
+                    <div class="target-title">Прорабы и планировщики</div>
+                    <div class="target-text">
+                        Управление исключениями вместо рутины, автоматические отчёты, мобильное приложение.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="col-md-4">
+                <div class="target-card">
+                    <div class="target-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-share2-icon lucide-share-2">
+                            <circle cx="18" cy="5" r="3"/>
+                            <circle cx="6" cy="12" r="3"/>
+                            <circle cx="18" cy="19" r="3"/>
+                            <line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/>
+                            <line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/>
+                        </svg>
+                    </div>
+                    <div class="target-title">Проектные офисы (PMO)</div>
+                    <div class="target-text">
+                        Единый инструмент контроля качества решений по портфелю проектов.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="compare-section py-5">
+    <div class="container">
+
+        <h2 class="mb-5">Чем мы отличаемся</h2>
+
+        <div class="row g-4">
+
+            <!-- 1 -->
+            <div class="col-md-6">
+                <div class="compare-card">
+                    <div class="compare-icon red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                             stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-x-icon lucide-x">
+                            <path d="M18 6 6 18"/>
+                            <path d="m6 6 12 12"/>
+                        </svg>
+                    </div>
+                    <div class="compare-title">
+                        vs Oracle Primavera / MS Project
+                    </div>
+                    <div class="compare-text">
+                        Мы не строим жёсткие графики — мы учимся на вашем опыте,
+                        работаем с неопределённостью и предлагаем решения, а не просто планы.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="col-md-6">
+                <div class="compare-card">
+                    <div class="compare-icon green">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                             stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-check-icon lucide-check">
+                            <path d="M20 6 9 17l-5-5"/>
+                        </svg>
+                    </div>
+                    <div class="compare-title">
+                        vs Кастомные разработки на 1С
+                    </div>
+                    <div class="compare-text">
+                        Масштабируемое SaaS-решение, внедрение в 5 раз быстрее,
+                        постоянное обновление.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="col-md-6">
+                <div class="compare-card">
+                    <div class="compare-icon blue">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                             stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-flag-icon lucide-flag">
+                            <path d="M4 22V4a1 1 0 0 1 .4-.8A6 6 0 0 1 8 2c3 0 5 2 7.333 2q2 0 3.067-.8A1 1 0 0 1 20 4v10a1 1 0 0 1-.4.8A6 6 0 0 1 16 16c-3 0-5-2-8-2a6 6 0 0 0-4 1.528"/>
+                        </svg>
+                    </div>
+                    <div class="compare-title">
+                        vs Зарубежные AI-платформы
+                    </div>
+                    <div class="compare-text">
+                        Понимаем российскую специфику, работаем с кириллицей,
+                        соответствуем 152-ФЗ.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tech-section py-5">
+    <div class="container">
+        <h2 class="mb-5">Технологическое превосходство</h2>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                             stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-rocket-icon lucide-rocket">
+                            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+                            <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/>
+                            <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/>
+                            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/>
+                        </svg>
+                    </div>
+                    <div class="tech-title">
+                        Лёгкая и дообучаемая модель
+                    </div>
+                    <div class="tech-text">
+                        Высокая скорость обучения, минимальные требования к ресурсам.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                             stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-puzzle-icon lucide-puzzle">
+                            <path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/>
+                        </svg>
+                    </div>
+                    <div class="tech-title">
+                        Модульная архитектура
+                    </div>
+                    <div class="tech-text">
+                        Поэтапное внедрение — начинаем с самых приоритетных задач.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                             stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-plug2-icon lucide-plug-2">
+                            <path d="M9 2v6"/>
+                            <path d="M15 2v6"/>
+                            <path d="M12 17v5"/>
+                            <path d="M5 8h14"/>
+                            <path d="M6 11V8h12v3a6 6 0 1 1-12 0Z"/>
+                        </svg>
+                    </div>
+                    <div class="tech-title">
+                        Полная интеграция
+                    </div>
+                    <div class="tech-text">
+                        Не требует замены текущих систем — работает поверх них.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="tech-card">
+                    <div class="tech-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                             stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                             class="lucide lucide-gavel-icon lucide-gavel">
+                            <path d="m14 13-8.381 8.38a1 1 0 0 1-3.001-3l8.384-8.381"/>
+                            <path d="m16 16 6-6"/>
+                            <path d="m21.5 10.5-8-8"/>
+                            <path d="m8 8 6-6"/>
+                            <path d="m8.5 7.5 8 8"/>
+                        </svg>
+                    </div>
+                    <div class="tech-title">
+                        Работает от регламентов
+                    </div>
+                    <div class="tech-text">
+                        Учитывает отраслевые стандарты и внутренние правила компании.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="survey" class="container py-5 section-light">
+    <h2 class="text-center mb-5">Помогите нам стать лучше</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+
+            <form action="/api/survey" method="post" class="card p-4 shadow">
+
+                <input class="form-control mb-3" name="position" placeholder="Ваша должность (необязательно)">
+                <input class="form-control mb-4" name="company" placeholder="Компания (необязательно)">
+
+                <div class="mb-4">
+                    <p><b>1. Вы часто сталкиваетесь с ситуацией, когда информация о ходе проекта поступает с
+                        опозданием?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="1" required> 1
+                        (никогда)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q1" value="5"> 5
+                        (постоянно)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>2. Считаете ли вы, что ваши руководители перегружены рутиной в ущерб стратегическим
+                        задачам?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="1" required> 1
+                        (нет)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q2" value="5"> 5 (очень
+                        сильно)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>3. Случалось ли, что уход ключевого сотрудника приводил к потере критически важной информации
+                        о проекте?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q3" value="1" required> 1
+                        (никогда)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q3" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q3" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q3" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q3" value="5"> 5 (часто)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>4. Возникают ли на ваших проектах конфликты между участниками из-за несогласованности
+                        данных?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q4" value="1" required> 1
+                        (никогда)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q4" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q4" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q4" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q4" value="5"> 5
+                        (постоянно)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>5. Приходится ли вам регулярно тушить «пожары» вместо того, чтобы работать на опережение?</b>
+                    </p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q5" value="1" required> 1
+                        (никогда)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q5" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q5" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q5" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q5" value="5"> 5 (часто)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>6. Уверены ли вы, что текущие инструменты планирования (MS Project, Excel) справляются со
+                        сложностью ваших проектов?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q6" value="1" required> 1
+                        (полностью)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q6" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q6" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q6" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q6" value="5"> 5 (нет)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>7. Оцените, насколько точно вы можете спрогнозировать сроки завершения проекта сегодня?</b>
+                    </p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q7" value="1" required> 1
+                        (точно)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q7" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q7" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q7" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q7" value="5"> 5 (нет)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>8. Часто ли возникают простои из-за несвоевременной поставки материалов или недоступности
+                        ресурсов?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q8" value="1" required> 1
+                        (никогда)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q8" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q8" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q8" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q8" value="5"> 5 (часто)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>9. Внедрены ли у вас ВІМ-технологии, и используют ли их для управления строительством?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q9" value="1" required> 1
+                        (нет)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q9" value="2"> 2
+                        (частично)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q9" value="3"> 3
+                        (активно)
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <p><b>10. Заинтересованы ли вы в системах, которые автоматически предлагают корректирующие решения
+                        при отклонениях от плана?</b></p>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q10" value="1" required>
+                        1 (нет)
+                    </div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q10" value="2"> 2</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q10" value="3"> 3</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q10" value="4"> 4</div>
+                    <div class="form-check"><input class="form-check-input" type="radio" name="q10" value="5"> 5 (да)
+                    </div>
+                </div>
+
+                <button class="btn btn-primary w-100">Отправить опрос</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="lead" class="container py-5">
+    <h2 class="text-center mb-4">Оставить заявку</h2>
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <!-- сообщения -->
+            <div th:if="${success}" class="alert alert-success">
+                Заявка успешно отправлена
+            </div>
+
+            <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+
+            <form action="/api/lead" method="post" class="card p-4 shadow">
+
+                <div class="mb-3">
+                    <label class="form-label">Имя *</label>
+                    <input class="form-control" name="name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Телефон *</label>
+                    <input class="form-control" name="phone" id="phone" type="tel" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email *</label>
+                    <input class="form-control" name="email" type="email" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Компания *</label>
+                    <input class="form-control" name="company" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Должность</label>
+                    <input class="form-control" name="position">
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label">Сообщение</label>
+                    <textarea class="form-control" name="message" rows="4"
+                              placeholder="Напишите, что вас интересует..."></textarea>
+                </div>
+
+                <button class="btn btn-success w-100">
+                    Отправить заявку
+                </button>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<section id="contacts" class="contacts-section py-5">
+    <div class="container">
+        <h2>Контакты</h2>
+        <div class="contacts-list">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="lucide lucide-map-pin-icon lucide-map-pin">
+                        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <span>Россия, Новосибирск, Академгородок</span>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="lucide lucide-mail-icon lucide-mail">
+                        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/>
+                        <rect x="2" y="4" width="20" height="16" rx="2"/>
+                    </svg>
+                </div>
+                <span>a.rofe@yandex.ru</span>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="lucide lucide-globe-icon lucide-globe">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                        <path d="M2 12h20"/>
+                    </svg>
+                </div>
+                <span>apexmind.ru</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
