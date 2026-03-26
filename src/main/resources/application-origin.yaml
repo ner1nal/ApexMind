@@ -1,3 +1,25 @@
 spring:
   application:
     name: apex-mind
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/database-name
+    username: username
+    password: password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mail:
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: username
+    password: password
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+
+server:
+  port: 8080
